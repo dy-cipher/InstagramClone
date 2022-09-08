@@ -37,26 +37,22 @@ public class LoginActivity extends AppCompatActivity {
          EditText etPassword;
          Button btnLog;
          Button btnSignUp;
-         ImageView ivLogo;
-        Context context;
+
 
         etUserLog = findViewById(R.id.etUserName);
         etPassword = findViewById(R.id.etPassword);
         btnLog = findViewById(R.id.btnLog);
         btnSignUp = findViewById(R.id.btnSignUp);
-        ivLogo = findViewById(R.id.ivLogo);
 
-//        Glide.with(this)
-//                .load(R.drawable.insta_logo)
-//                .into(ivLogo);
+
 
         btnLog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.i(TAG, "onClick button");
                 String username = etUserLog.getText().toString();
-                String passsword = etPassword.getText().toString();
-                loginUser(username, passsword);
+                String password = etPassword.getText().toString();
+                loginUser(username, password);
             }
         });
 
@@ -113,8 +109,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
-
-
 
     private void goMainActivity() {
         Intent intent = new Intent(this, MainActivity.class);
