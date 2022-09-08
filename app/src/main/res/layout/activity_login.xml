@@ -31,7 +31,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:layout_below="@+id/toolbar"
+        android:layout_margin="5dp"
+        android:padding="10dp"
         android:ems="10"
+        android:background="@drawable/text_form"
         android:hint="Userhint"
         android:inputType="textPersonName"
         android:textColor="@color/black" />
@@ -40,6 +43,9 @@
             android:id="@+id/etPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/text_form"
+            android:padding="10dp"
+            android:layout_margin="5dp"
             android:layout_weight="1"
             android:ems="10"
             android:hint="Password"
@@ -53,6 +59,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/etPassword"
+            android:layout_margin="5dp"
+            android:background="@drawable/text_form"
             android:text="LOGIN"
             app:backgroundTint="#03A9F4" />
 
@@ -60,6 +68,8 @@
             android:id="@+id/btnSignUp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/text_form"
+            android:layout_margin="5dp"
             android:layout_below="@+id/btnLog"
             android:text="SIGN UP"
             app:backgroundTint="#34B339" />
