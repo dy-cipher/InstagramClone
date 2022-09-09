@@ -52,20 +52,20 @@
             android:inputType="textPersonName" />
     </com.google.android.material.textfield.TextInputLayout>
 
+        <Button
+            android:id="@+id/btnSubmit"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@+id/tlInput"
+            android:layout_centerHorizontal="true"
+            android:text="Submit"
+            android:textColor="@color/black"
+            app:backgroundTint="#DC9C9C9C"
+            app:cornerRadius="10dp"
+            android:textAlignment="center"
+            />
 
-    <Button
-        android:id="@+id/btnPicture"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tlInput"
-        android:layout_centerHorizontal="true"
-        android:gravity="center"
-        android:layout_weight="1"
-        android:text="Take picture"
-        android:textAlignment="center"
-        app:backgroundTint="#DC9C9C9C"
-        app:cornerRadius="10dp"
-        app:iconGravity="textEnd" />
+
 
     </RelativeLayout>
 
@@ -75,19 +75,19 @@
         android:layout_weight="0.1" />
 
     <Button
-        android:id="@+id/btnSubmit"
+        android:id="@+id/btnPicture"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/btnPicture"
-        android:visibility="gone"
-        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:text="Submit"
-        android:textColor="@color/black"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:layout_weight="1"
+        android:text="Take picture"
+        android:textAlignment="center"
         app:backgroundTint="#DC9C9C9C"
         app:cornerRadius="10dp"
-        android:textAlignment="center"
-        />
+        app:iconGravity="textEnd" />
+
 
 
 

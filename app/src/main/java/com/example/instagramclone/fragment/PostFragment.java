@@ -76,14 +76,14 @@ public class PostFragment extends Fragment {
         rlContainer = (RelativeLayout) view.findViewById(R.id.rlContainer);
 
 
-
+        ivPicture.setVisibility(View.VISIBLE);
         // Camera button click
         btnPicture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getContext(), "Launching camera", Toast.LENGTH_SHORT).show();
                 launchCamera();
-                ivPicture.setVisibility(View.VISIBLE);
+
             }
         });
 
@@ -135,6 +135,7 @@ public class PostFragment extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
         rlContainer.setVisibility(View.VISIBLE);
         btnPicture.setVisibility(View.INVISIBLE);
+
         if(requestCode ==CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE){
             if(resultCode== Activity.RESULT_OK){
 
