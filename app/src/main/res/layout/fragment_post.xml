@@ -10,9 +10,10 @@
         android:id="@+id/pbLoading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@id/btnPicture"
         android:layout_centerInParent="true"
-        android:layout_marginBottom="30dp"
-        android:visibility="invisible" />
+        android:layout_marginBottom="100dp"
+        android:visibility="gone" />
 
     <RelativeLayout
         android:id="@+id/rlContainer"
@@ -47,6 +48,8 @@
             android:layout_below="@id/ivPicture"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="70dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
             android:layout_weight="1"
             android:ems="10"
             android:inputType="textPersonName" />
@@ -54,11 +57,11 @@
 
         <Button
             android:id="@+id/btnSubmit"
-            android:layout_width="match_parent"
+            android:layout_width="100dp"
             android:layout_height="50dp"
             android:layout_below="@+id/tlInput"
             android:layout_centerHorizontal="true"
-            android:text="Submit"
+            android:text="Post"
             android:textColor="@color/black"
             app:backgroundTint="#DC9C9C9C"
             app:cornerRadius="10dp"
@@ -79,7 +82,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_centerInParent="true"
+        android:layout_alignParentBottom="true"
         android:gravity="center"
         android:layout_weight="1"
         android:text="Take picture"

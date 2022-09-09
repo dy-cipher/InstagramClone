@@ -91,8 +91,8 @@ public class PostFragment extends Fragment {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String Description = etDescription.getText().toString();
-                if(Description.isEmpty()){
+                String description = etDescription.getText().toString();
+                if(description.isEmpty()){
                     Toast.makeText(getContext(), "Description cannot be empty", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -102,7 +102,7 @@ public class PostFragment extends Fragment {
 
                 }
                 ParseUser currentUser = ParseUser.getCurrentUser();
-                savePost(Description, currentUser);
+                savePost(description, currentUser);
             }
         });
 
@@ -172,7 +172,7 @@ public class PostFragment extends Fragment {
         // Show progress bar
 
         Post post = new Post();
-        pbLoading.setVisibility(View.VISIBLE);
+        pbLoading.setVisibility(ProgressBar.VISIBLE);
         post.setDescription(description);
         post.setImage(new ParseFile(photoFile));
         post.setUser(currentUser);
@@ -182,12 +182,13 @@ public class PostFragment extends Fragment {
                 if(e != null){
                     Log.e(TAG, "Error while saving", e);
                     Toast.makeText(getContext(), "Error while saving", Toast.LENGTH_SHORT).show();
+                    pbLoading.setVisibility(ProgressBar.INVISIBLE);
                 }
                 Log.i(TAG, "Post was saved succesfully");
                 etDescription.setText("");
                 ivPicture.setImageResource(0);
                 // Hide progress bar
-                pbLoading.setVisibility(View.INVISIBLE);
+                pbLoading.setVisibility(ProgressBar.INVISIBLE);
             }
         });
     }
