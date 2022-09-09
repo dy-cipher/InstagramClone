@@ -9,17 +9,31 @@ import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
 import com.example.instagramclone.LoginActivity;
 import com.example.instagramclone.R;
 import com.parse.ParseUser;
 
-import java.util.zip.Inflater;
 
-public class profileFragment extends Fragment {
+
+public class ProfileFragment extends DialogFragment {
+
 
     Button btnLogOut;
+
+    public ProfileFragment(){}
+
+
+    public static ProfileFragment newInstance(String title) {
+        ProfileFragment frag = new ProfileFragment();
+        Bundle args = new Bundle();
+        args.putString("title", title);
+        frag.setArguments(args);
+        return frag;
+    }
+
 
     @Nullable
     @Override

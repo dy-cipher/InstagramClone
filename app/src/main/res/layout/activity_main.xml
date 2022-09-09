@@ -13,75 +13,12 @@
         android:layout_marginBottom="10dp"
         />
 
-
-        <ProgressBar
-            android:id="@+id/pbLoading"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_marginBottom="30dp"
-            android:visibility="invisible" />
-
-        <ImageView
-            android:id="@+id/ivPicture"
-            android:layout_width="match_parent"
-            android:layout_below="@+id/toolbar"
-            android:layout_height="300dp"
-
-             />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tlInput"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Description"
-            app:hintEnabled="true"
-            android:layout_below="@+id/ivPicture"
-            app:hintTextColor="#757373">
-
-            <EditText
-                android:id="@+id/etDescription"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
-                android:inputType="textPersonName" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-
-    <Button
-        android:id="@+id/btnPicture"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tlInput"
-        android:layout_centerHorizontal="true"
-        android:gravity="center"
-        android:layout_weight="1"
-        android:text="Take picture"
-        android:textAlignment="center"
-        app:backgroundTint="#DC9C9C9C"
-        app:cornerRadius="10dp"
-        app:iconGravity="textEnd" />
-
-            <Space
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.1" />
-
-            <Button
-                android:id="@+id/btnSubmit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/btnPicture"
-                android:layout_centerHorizontal="true"
-                android:layout_weight="1"
-                android:text="Submit"
-                android:textColor="@color/black"
-                app:backgroundTint="#DC9C9C9C"
-                app:cornerRadius="10dp"
-                android:textAlignment="center"
-                 />
-
+    <FrameLayout
+        android:id="@+id/flContainer"
+        android:layout_below="@id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/bottom_navigation" />
 
 
 <!--        <Button-->
@@ -92,7 +29,6 @@
 <!--            android:textColor="@color/black"-->
 <!--            app:backgroundTint="#DC9C9C9C"-->
 <!--            app:cornerRadius="10dp" />-->
-
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

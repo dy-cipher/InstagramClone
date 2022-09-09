@@ -12,8 +12,11 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 import com.bumptech.glide.Glide;
+import com.example.instagramclone.fragment.HomeFragment;
+import com.example.instagramclone.fragment.ProfileFragment;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
@@ -81,7 +84,7 @@ public class LoginActivity extends AppCompatActivity {
                     return;
                 }
                 // Go to the main activity
-                goMainActivity();
+                showEditDialog();
                 Toast.makeText(LoginActivity.this, "Success", Toast.LENGTH_SHORT);
             }
         });
@@ -114,5 +117,11 @@ public class LoginActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    private void showEditDialog() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        HomeFragment homeFragment = HomeFragment.newInstance("Home");
+        homeFragment.show(fragmentManager, "fragment_home");
     }
 }
