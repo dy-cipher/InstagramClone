@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 
 import com.example.instagramclone.fragment.HomeFragment;
@@ -23,6 +24,7 @@ import com.google.android.material.navigation.NavigationBarView;
 
 public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
+    final FragmentManager fragmentManager = getSupportFragmentManager();
     final Fragment PostFragment = new PostFragment();
     final Fragment HomeFragment = new HomeFragment();
     final Fragment ProfileFragment = new ProfileFragment();
@@ -38,38 +40,28 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Fragment fragment;
                 switch (item.getItemId()) {
                     case R.id.home:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.flContainer, HomeFragment).commit();
+                        fragment = new HomeFragment();
                         break;
                     case R.id.plus:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.flContainer, PostFragment).commit();
+                        fragment = new PostFragment();
                         break;
                     case R.id.profil:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.flContainer, ProfileFragment).commit();
+                        fragment = new ProfileFragment();
+                        break;
+                    default:
+                        fragment = new PostFragment();
                         break;
                 }
+                fragmentManager.beginTransaction().replace(R.id.flContainer, fragment).commit();
                 return true;
             }
         });
 
         bottomNavigationView.setSelectedItemId(R.id.home);
 
-//        ParseObject firstObject = new  ParseObject("FirstClass");
-//        firstObject.put("message","Hey ! First message from android. Parse is now connected");
-//        firstObject.saveInBackground(e -> {
-//            if (e != null){
-//                Log.e(TAG, e.getLocalizedMessage());
-//            }else{
-//                Log.d(TAG,"Object saved.");
-//            }
-//        });
-//
-//        queryPost();
-//
-//
-//
-//
 
 
     }}

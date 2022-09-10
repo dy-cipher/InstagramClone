@@ -101,6 +101,7 @@ public class PostFragment extends Fragment {
                     return;
 
                 }
+                pbLoading.setVisibility(ProgressBar.VISIBLE);
                 ParseUser currentUser = ParseUser.getCurrentUser();
                 savePost(description, currentUser);
             }

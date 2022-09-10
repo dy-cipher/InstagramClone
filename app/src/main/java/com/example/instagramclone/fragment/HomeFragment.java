@@ -35,11 +35,11 @@ public class HomeFragment extends DialogFragment {
 
 
     public static HomeFragment newInstance(String title) {
-        HomeFragment frag = new HomeFragment();
+        HomeFragment homeFragment = new HomeFragment();
         Bundle args = new Bundle();
         args.putString("title", title);
-        frag.setArguments(args);
-        return frag;
+        homeFragment.setArguments(args);
+        return homeFragment;
     }
 
     @Nullable
@@ -69,6 +69,7 @@ public class HomeFragment extends DialogFragment {
     private void queryPost() {
         ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
         query.include(Post.KEY_USER);
+        query.setLimit(20);
         query.findInBackground(new FindCallback<Post>() {
             @Override
             public void done(List<Post> posts_home, ParseException e) {

@@ -11,8 +11,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.example.instagramclone.R;
 import com.example.instagramclone.model.Post;
+import com.parse.ParseFile;
 
 import java.util.List;
 
@@ -68,10 +70,13 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         public void bind(Post post){
             tvDescription.setText(post.getDescription());
             tvUserName.setText(post.getUser().getUsername());
+            ParseFile image = post.getImage();
 
-            if (post.getImage() != null){
+            if (image != null){
                 Glide.with(context)
-                        .load(post.getImage().getUrl())
+                        .load(image.getUrl())
+                        .centerCrop()
+                        .transform(new RoundedCorners(20))
                         .into(ivImage);
             }
         }
