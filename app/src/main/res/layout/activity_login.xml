@@ -25,7 +25,7 @@
         android:padding="10dp"
         android:ems="10"
         android:background="@drawable/text_form"
-        android:hint="Userhint"
+        android:hint="Username"
         android:inputType="textPersonName"
         android:textColor="@color/black" />
 

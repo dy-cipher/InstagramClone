@@ -29,7 +29,7 @@
             android:layout_centerHorizontal="true"
             android:fontFamily="@font/veganstyle"
             android:textSize="20sp"
-
+            android:textColor="@color/black"
             android:text="Instagram" />
 
         <ImageView
