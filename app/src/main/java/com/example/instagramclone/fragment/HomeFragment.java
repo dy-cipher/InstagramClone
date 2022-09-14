@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.instagramclone.R;
 import com.example.instagramclone.adapter.PostAdapter;
+import com.example.instagramclone.listeners.EndlessRecyclerViewScrollListener;
 import com.example.instagramclone.model.Post;
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -62,14 +63,30 @@ public class HomeFragment extends DialogFragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         rvPosts.setLayoutManager(layoutManager);
 
-        queryPost();
+        EndlessRecyclerViewScrollListener scrollListener = new EndlessRecyclerViewScrollListener(layoutManager) {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+                queryPost();
+                int curSize = adapter.getItemCount();
+
+                view.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        adapter.notifyItemRangeInserted(curSize, posts.size() - 1);
+                    }
+                });
+            }
+        };
+        rvPosts.addOnScrollListener(scrollListener);
+//        queryPost();
 
     }
 
-    private void queryPost() {
+    protected void queryPost() {
         ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
         query.include(Post.KEY_USER);
         query.setLimit(20);
+        query.addDescendingOrder(Post.KEY_CREATED_KEY);
         query.findInBackground(new FindCallback<Post>() {
             @Override
             public void done(List<Post> posts_home, ParseException e) {

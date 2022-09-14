@@ -9,6 +9,7 @@
         android:id="@+id/home"
         app:showAsAction="ifRoom"
         android:icon="@drawable/home"
+        android:checked="true"
         tools:ignore="MenuTitle" />
 
     <item

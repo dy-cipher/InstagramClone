@@ -18,17 +18,7 @@
         android:layout_below="@id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/bottom_navigation" />
-
-
-<!--        <Button-->
-<!--            android:id="@+id/logOutBtn"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="LOG OUT"-->
-<!--            android:textColor="@color/black"-->
-<!--            app:backgroundTint="#DC9C9C9C"-->
-<!--            app:cornerRadius="10dp" />-->
+        android:layout_above="@id/bottom_navigation" /> 
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

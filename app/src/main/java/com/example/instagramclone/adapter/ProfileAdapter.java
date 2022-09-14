@@ -18,8 +18,7 @@ import com.parse.ParseFile;
 
 import java.util.List;
 
-public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
-
+public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHolder> {
 
     Context context;
     List<Post> posts;
@@ -27,24 +26,24 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
 
     // Pass in the context and list of posts
-    public PostAdapter (Context context, List<Post> posts) {
+    public ProfileAdapter (Context context, List<Post> posts) {
         this.context = context;
         this.posts = posts;
     }
 
+
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        view = LayoutInflater.from(context).inflate(R.layout.item_post, parent, false);
-        return new ViewHolder(view);
+    public ProfileAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        view = LayoutInflater.from(context).inflate(R.layout.item_profile, parent, false);
+        return new ProfileAdapter.ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ProfileAdapter.ViewHolder holder, int position) {
         Post post = posts.get(position);
         holder.bind(post);
     }
-
 
     @Override
     public int getItemCount() {
@@ -52,29 +51,22 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     }
 
 
-    public  class ViewHolder extends RecyclerView.ViewHolder{
+    public  class ViewHolder extends RecyclerView.ViewHolder {
 
         ImageView ivImage;
-        TextView tvDescription,  tvUserName, tvCreatedAt;
-
-
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             ivImage = itemView.findViewById(R.id.ivImage);
-            tvDescription = itemView.findViewById(R.id.tvDescription);
-            tvUserName = itemView.findViewById(R.id.tvUserName);
-            tvCreatedAt = itemView.findViewById(R.id.tvCreatedAt);
+
         }
 
 
-        public void bind(Post post){
-            tvDescription.setText(post.getDescription());
-            tvUserName.setText(post.getUser().getUsername());
-            tvCreatedAt.setText(post.getCreatedAt().toString());
+        public void bind(Post post) {
+
             ParseFile image = post.getImage();
 
-            if (image != null){
+            if (image != null) {
                 Glide.with(context)
                         .load(image.getUrl())
                         .centerCrop()
@@ -85,3 +77,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
     }
 }
+
+
+
+

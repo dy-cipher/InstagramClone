@@ -80,12 +80,12 @@ public class LoginActivity extends AppCompatActivity {
             public void done(ParseUser user, ParseException e) {
                 if(e != null){
                     Log.e(TAG, "Issue with login", e);
-                    Toast.makeText(LoginActivity.this, "Incorrect username or password", Toast.LENGTH_SHORT);
+                    Toast.makeText(LoginActivity.this, "Incorrect username or password", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 // Go to the main activity
-                showEditDialog();
-                Toast.makeText(LoginActivity.this, "Success", Toast.LENGTH_SHORT);
+                goMainActivity();
+                Toast.makeText(LoginActivity.this, "Success", Toast.LENGTH_SHORT).show();
             }
         });
 
