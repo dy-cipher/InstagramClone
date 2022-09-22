@@ -67,9 +67,6 @@ public class ProfileFragment extends DialogFragment {
     ProgressBar pbLoading;
 
 
-    String profile_url = ParseUser.getCurrentUser().getParseFile(User.KEY_PROFILE).getUrl();
-
-
     public ProfileFragment(){}
 
 
@@ -94,9 +91,12 @@ public class ProfileFragment extends DialogFragment {
         rvPosts = view.findViewById(R.id.rvPosts);
         btnLogOut = view.findViewById(R.id.btnLogOut);
         ivEdit = view.findViewById(R.id.ivEdit);
-        ivImage = view.findViewById(R.id.ivImage);
-        tvUsername = view.findViewById(R.id.tvUserName);
+        ivImage = view.findViewById(R.id.ivProfile);
+        tvUsername = view.findViewById(R.id.tvUsername);
         pbLoading = view.findViewById(R.id.pbLoading);
+
+        ParseUser currentUser =  ParseUser.getCurrentUser();
+        String profile_url = currentUser.getParseFile(User.KEY_PROFILE).getUrl();
 
         posts = new ArrayList<>();
         profileAdapter = new ProfileAdapter(getContext(), posts);
@@ -113,7 +113,7 @@ public class ProfileFragment extends DialogFragment {
                 .transform(new RoundedCorners(30))
                 .into(ivImage);
 
-        tvUsername.setText(ParseUser.getCurrentUser().getUsername());
+        tvUsername.setText(currentUser.getUsername());
         ivEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
