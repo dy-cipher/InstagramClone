@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.instagramclone.R;
 import com.example.instagramclone.adapter.PostAdapter;
@@ -28,6 +29,7 @@ public class HomeFragment extends DialogFragment {
     private static final String TAG = "HomeFragment" ;
     RecyclerView rvPosts;
     PostAdapter adapter;
+    SwipeRefreshLayout swipeRefreshLayout;
     List<Post> posts;
 
 
@@ -54,6 +56,7 @@ public class HomeFragment extends DialogFragment {
         super.onViewCreated(view, savedInstanceState);
 
         rvPosts = view.findViewById(R.id.rvPosts);
+        swipeRefreshLayout = view.findViewById(R.id.srlContainer);
 
 
         posts = new ArrayList<>();
@@ -62,6 +65,19 @@ public class HomeFragment extends DialogFragment {
         rvPosts.setAdapter(adapter);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         rvPosts.setLayoutManager(layoutManager);
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                adapter.clear();
+                adapter.addAll(posts);
+                queryPost();
+
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
+
+
 
         EndlessRecyclerViewScrollListener scrollListener = new EndlessRecyclerViewScrollListener(layoutManager) {
             @Override

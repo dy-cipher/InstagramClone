@@ -1,10 +1,12 @@
 package com.example.instagramclone.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,8 +15,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.example.instagramclone.R;
+import com.example.instagramclone.activities.CommentActivity;
+import com.example.instagramclone.activities.DetailActivity;
 import com.example.instagramclone.model.Post;
+import com.example.instagramclone.utils.TimeFormatter;
 import com.parse.ParseFile;
+
+import org.parceler.Parcels;
 
 import java.util.List;
 
@@ -24,6 +31,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     Context context;
     List<Post> posts;
     View view;
+
 
 
     // Pass in the context and list of posts
@@ -51,27 +59,52 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         return posts.size();
     }
 
+    public void clear() {
+        posts.clear();
+        notifyDataSetChanged();
+    }
+
+    // Add a list of items -- change to type used
+    public void addAll(List<Post> list) {
+        posts.addAll(list);
+        notifyDataSetChanged();
+    }
+
 
     public  class ViewHolder extends RecyclerView.ViewHolder{
 
-        ImageView ivImage;
+        ImageView ivImage, ivComment;
         TextView tvDescription,  tvUserName, tvCreatedAt;
+        RelativeLayout rlContainer;
 
 
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             ivImage = itemView.findViewById(R.id.ivImage);
+            ivComment = itemView.findViewById(R.id.ivComment);
             tvDescription = itemView.findViewById(R.id.tvDescription);
             tvUserName = itemView.findViewById(R.id.tvUserName);
             tvCreatedAt = itemView.findViewById(R.id.tvCreatedAt);
+            rlContainer = itemView.findViewById(R.id.rlContainer);
         }
 
 
         public void bind(Post post){
             tvDescription.setText(post.getDescription());
             tvUserName.setText(post.getUser().getUsername());
-            tvCreatedAt.setText(post.getCreatedAt().toString());
+            tvCreatedAt.setText(TimeFormatter.getTimeDifference(post.getCreatedAt().toString()));
+
+            rlContainer.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    Intent i = new Intent(context, DetailActivity.class);
+                    i.putExtra("data", Parcels.wrap(post));
+                    context.startActivity(i);
+
+                }
+            });
             ParseFile image = post.getImage();
 
             if (image != null){
@@ -81,6 +114,16 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                         .transform(new RoundedCorners(20))
                         .into(ivImage);
             }
+
+
+            ivComment.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent (context, CommentActivity.class);
+                    intent.putExtra("post", Parcels.wrap(post));
+                    context.startActivity(intent);
+                }
+            });
         }
 
     }

@@ -4,22 +4,32 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/7vault/AndroidStudioProjects/InstagramClone/app/src/main/res/drawable/account.xml" value="0.1705" />
+        <entry key="..\:/Users/7vault/AndroidStudioProjects/InstagramClone/app/src/main/res/drawable/account_outline.xml" value="0.1" />
+        <entry key="..\:/Users/7vault/AndroidStudioProjects/InstagramClone/app/src/main/res/drawable/account_selector.xml" value="0.1" />
         <entry key="..\:/Users/7vault/AndroidStudioProjects/InstagramClone/app/src/main/res/drawable/comment.xml" value="0.1785" />
         <entry key="..\:/Users/7vault/AndroidStudioProjects/InstagramClone/app/src/main/res/drawable/heart.xml" value="0.1785" />
+        <entry key="..\:/Users/7vault/AndroidStudioProjects/InstagramClone/app/src/main/res/drawable/heart_outline.xml" value="0.1" />
         <entry key="..\:/Users/7vault/AndroidStudioProjects/InstagramClone/app/src/main/res/drawable/home.xml" value="0.2415" />
+        <entry key="..\:/Users/7vault/AndroidStudioProjects/InstagramClone/app/src/main/res/drawable/home_outline.xml" value="0.1" />
+        <entry key="..\:/Users/7vault/AndroidStudioProjects/InstagramClone/app/src/main/res/drawable/home_selector.xml" value="0.1" />
         <entry key="..\:/Users/7vault/AndroidStudioProjects/InstagramClone/app/src/main/res/drawable/ic_baseline_send_24.xml" value="0.2415" />
         <entry key="..\:/Users/7vault/AndroidStudioProjects/InstagramClone/app/src/main/res/drawable/nav_item_color.xml" value="0.126" />
         <entry key="..\:/Users/7vault/AndroidStudioProjects/InstagramClone/app/src/main/res/drawable/plus_sign.xml" value="0.1705" />
+        <entry key="..\:/Users/7vault/AndroidStudioProjects/InstagramClone/app/src/main/res/drawable/plus_sign_outline.xml" value="0.1" />
+        <entry key="..\:/Users/7vault/AndroidStudioProjects/InstagramClone/app/src/main/res/drawable/plus_sign_selector.xml" value="0.1" />
         <entry key="..\:/Users/7vault/AndroidStudioProjects/InstagramClone/app/src/main/res/drawable/save.xml" value="0.1785" />
         <entry key="..\:/Users/7vault/AndroidStudioProjects/InstagramClone/app/src/main/res/drawable/send.xml" value="0.1785" />
         <entry key="..\:/Users/7vault/AndroidStudioProjects/InstagramClone/app/src/main/res/drawable/text_form.xml" value="0.1705" />
         <entry key="..\:/Users/7vault/AndroidStudioProjects/InstagramClone/app/src/main/res/layout-w1240dp/activity_login.xml" value="0.1" />
         <entry key="..\:/Users/7vault/AndroidStudioProjects/InstagramClone/app/src/main/res/layout-w936dp/activity_login.xml" value="0.1" />
+        <entry key="..\:/Users/7vault/AndroidStudioProjects/InstagramClone/app/src/main/res/layout/activity_comment.xml" value="0.23645833333333333" />
+        <entry key="..\:/Users/7vault/AndroidStudioProjects/InstagramClone/app/src/main/res/layout/activity_detail.xml" value="0.23645833333333333" />
         <entry key="..\:/Users/7vault/AndroidStudioProjects/InstagramClone/app/src/main/res/layout/activity_login.xml" value="0.2" />
         <entry key="..\:/Users/7vault/AndroidStudioProjects/InstagramClone/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/Users/7vault/AndroidStudioProjects/InstagramClone/app/src/main/res/layout/fragment_home.xml" value="0.23541666666666666" />
         <entry key="..\:/Users/7vault/AndroidStudioProjects/InstagramClone/app/src/main/res/layout/fragment_post.xml" value="0.1" />
         <entry key="..\:/Users/7vault/AndroidStudioProjects/InstagramClone/app/src/main/res/layout/fragment_profile.xml" value="0.12454710144927536" />
+        <entry key="..\:/Users/7vault/AndroidStudioProjects/InstagramClone/app/src/main/res/layout/item_comment.xml" value="0.23541666666666666" />
         <entry key="..\:/Users/7vault/AndroidStudioProjects/InstagramClone/app/src/main/res/layout/item_post.xml" value="0.12771739130434784" />
         <entry key="..\:/Users/7vault/AndroidStudioProjects/InstagramClone/app/src/main/res/layout/item_profile.xml" value="0.23541666666666666" />
         <entry key="..\:/Users/7vault/AndroidStudioProjects/InstagramClone/app/src/main/res/layout/toolbar.xml" value="0.23645833333333333" />

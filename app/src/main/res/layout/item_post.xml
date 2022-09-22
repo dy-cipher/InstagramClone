@@ -61,9 +61,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/ivImage"
-        android:layout_toEndOf="@id/ivHeart"
         android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"
+        android:layout_toEndOf="@id/ivHeart"
         app:srcCompat="@drawable/comment" />
 
     <ImageView

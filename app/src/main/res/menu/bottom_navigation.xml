@@ -8,20 +8,20 @@
     <item
         android:id="@+id/home"
         app:showAsAction="ifRoom"
-        android:icon="@drawable/home"
+        android:icon="@drawable/home_selector"
         android:checked="true"
         tools:ignore="MenuTitle" />
 
     <item
         android:id="@+id/plus"
         app:showAsAction="ifRoom"
-        android:icon="@drawable/plus_sign"
+        android:icon="@drawable/plus_sign_selector"
         tools:ignore="MenuTitle" />
 
     <item
         android:id="@+id/profil"
         app:showAsAction="ifRoom"
-        android:icon="@drawable/account"
+        android:icon="@drawable/account_selector"
         tools:ignore="MenuTitle" />
 
 </menu>

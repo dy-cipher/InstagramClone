@@ -6,7 +6,7 @@
     tools:context=".MainActivity">
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/swipeContainer"
+        android:id="@+id/srlContainer"
         android:layout_width="match_parent"
         android:layout_marginTop="70dp"
 
