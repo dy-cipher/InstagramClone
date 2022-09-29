@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -41,6 +42,8 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
+import org.parceler.Parcels;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,21 +53,22 @@ public class ProfileFragment extends DialogFragment {
 
 
     Button btnLogOut;
-    RecyclerView rvPosts;
+    GridView GvPosts;
     ImageView ivImage,ivEdit;
     TextView tvUsername;
 
 
     public static final String TAG = "ProfileFragment";
     public static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 69;
-    public static final ParseUser CURRENT_USER =  ParseUser.getCurrentUser();
 
     private File photoFile;
     public String photoFileName = "photo.jpg";
 
     ProfileAdapter profileAdapter;
-    List<Post> posts;
+    ArrayList<Post> posts;
     ProgressBar pbLoading;
+    ParseUser CurrentUser;
+    String profile_url;
 
 
     public ProfileFragment(){}
@@ -88,22 +92,29 @@ public class ProfileFragment extends DialogFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        rvPosts = view.findViewById(R.id.rvPosts);
+        GvPosts = view.findViewById(R.id.GvPosts);
         btnLogOut = view.findViewById(R.id.btnLogOut);
         ivEdit = view.findViewById(R.id.ivEdit);
         ivImage = view.findViewById(R.id.ivProfile);
         tvUsername = view.findViewById(R.id.tvUsername);
         pbLoading = view.findViewById(R.id.pbLoading);
 
-        ParseUser currentUser =  ParseUser.getCurrentUser();
-        String profile_url = currentUser.getParseFile(User.KEY_PROFILE).getUrl();
+        Bundle bundle = getArguments();
+        if (bundle == null){
+            CurrentUser =  ParseUser.getCurrentUser();
+            profile_url = CurrentUser.getParseFile(User.KEY_PROFILE).getUrl();
+        }else {
+            Post post = Parcels.unwrap(bundle.getParcelable("post"));
+            CurrentUser = post.getUser();
+            profile_url = post.getUser().getParseFile(User.KEY_PROFILE).getUrl();
+        }
+
+
 
         posts = new ArrayList<>();
         profileAdapter = new ProfileAdapter(getContext(), posts);
-        rvPosts.setAdapter(profileAdapter);
+        GvPosts.setAdapter(profileAdapter);
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-        rvPosts.setLayoutManager(layoutManager);
         queryPost();
 
 
@@ -113,7 +124,7 @@ public class ProfileFragment extends DialogFragment {
                 .transform(new RoundedCorners(30))
                 .into(ivImage);
 
-        tvUsername.setText(currentUser.getUsername());
+        tvUsername.setText(CurrentUser.getUsername());
         ivEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -196,7 +207,7 @@ public class ProfileFragment extends DialogFragment {
         ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
         query.include(Post.KEY_USER);
         query.setLimit(20);
-        query.whereEqualTo(Post.KEY_USER, CURRENT_USER);
+        query.whereEqualTo(Post.KEY_USER, CurrentUser);
         query.addDescendingOrder(Post.KEY_CREATED_KEY);
         query.findInBackground(new FindCallback<Post>() {
             @Override
@@ -219,7 +230,7 @@ public class ProfileFragment extends DialogFragment {
     public void updateProfile(){
         pbLoading.setVisibility(ProgressBar.VISIBLE);
 
-        User currentUser = (User) CURRENT_USER;
+        User currentUser = (User) CurrentUser;
         // Set custom properties
         currentUser.setProfile(new ParseFile(photoFile));
 

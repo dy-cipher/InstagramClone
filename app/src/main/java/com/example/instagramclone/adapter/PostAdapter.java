@@ -2,14 +2,18 @@ package com.example.instagramclone.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -17,7 +21,9 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.example.instagramclone.R;
 import com.example.instagramclone.activities.CommentActivity;
 import com.example.instagramclone.activities.DetailActivity;
+import com.example.instagramclone.fragment.ProfileFragment;
 import com.example.instagramclone.model.Post;
+import com.example.instagramclone.model.User;
 import com.example.instagramclone.utils.TimeFormatter;
 import com.parse.ParseFile;
 
@@ -31,8 +37,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     Context context;
     List<Post> posts;
     View view;
-
-
 
     // Pass in the context and list of posts
     public PostAdapter (Context context, List<Post> posts) {
@@ -73,20 +77,23 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
     public  class ViewHolder extends RecyclerView.ViewHolder{
 
-        ImageView ivImage, ivComment;
+        ImageView ivImage, ivComment, ivImageProfile;
         TextView tvDescription,  tvUserName, tvCreatedAt;
         RelativeLayout rlContainer;
+        LinearLayout ProfileContainer;
 
 
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             ivImage = itemView.findViewById(R.id.ivImage);
+            ivImageProfile = itemView.findViewById(R.id.ivImageProfile);
             ivComment = itemView.findViewById(R.id.ivComment);
             tvDescription = itemView.findViewById(R.id.tvDescription);
             tvUserName = itemView.findViewById(R.id.tvUserName);
             tvCreatedAt = itemView.findViewById(R.id.tvCreatedAt);
             rlContainer = itemView.findViewById(R.id.rlContainer);
+            ProfileContainer = itemView.findViewById(R.id.ProfileContainer);
         }
 
 
@@ -94,6 +101,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             tvDescription.setText(post.getDescription());
             tvUserName.setText(post.getUser().getUsername());
             tvCreatedAt.setText(TimeFormatter.getTimeDifference(post.getCreatedAt().toString()));
+            Glide.with(context).load(post.getUser().getParseFile(User.KEY_PROFILE).getUrl()).into(ivImageProfile);
 
             rlContainer.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -122,6 +130,22 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                     Intent intent = new Intent (context, CommentActivity.class);
                     intent.putExtra("post", Parcels.wrap(post));
                     context.startActivity(intent);
+                }
+            });
+
+
+            ProfileContainer.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    FragmentManager fragmentManager = ((FragmentActivity) context).getSupportFragmentManager();
+
+                    // set parameters
+                    ProfileFragment profileFragment = ProfileFragment.newInstance("Some Title");
+                    Bundle bundle = new Bundle();
+                    bundle.putParcelable("post", Parcels.wrap(post));
+                    profileFragment.setArguments(bundle);
+
+                    fragmentManager.beginTransaction().replace(R.id.flContainer, profileFragment).commit();
                 }
             });
         }

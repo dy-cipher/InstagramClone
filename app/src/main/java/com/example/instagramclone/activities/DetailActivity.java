@@ -65,17 +65,17 @@ public class DetailActivity extends AppCompatActivity {
         rlContainer = findViewById(R.id.rlContainer);
         rvComments = findViewById(R.id.rvComments);
 
+        comments = new ArrayList<>();
+        adapter = new CommentAdapter(context, comments);
+        rvComments.setLayoutManager(new LinearLayoutManager(context));
+        rvComments.setAdapter(adapter);
+
         tvDescription.setText(post.getDescription());
         tvUsername.setText(post.getUser().getUsername());
         tvCreatedAt.setText(TimeFormatter.getTimeStamp(post.getCreatedAt().toString()));
 
         String picture_url = post.getImage().getUrl();
         String profile_url = post.getUser().getParseFile(User.KEY_PROFILE).getUrl();
-
-        comments = new ArrayList<>();
-        adapter = new CommentAdapter(context, comments);
-        rvComments.setLayoutManager(new LinearLayoutManager(context));
-        rvComments.setAdapter(adapter);
 
         ivImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,11 +87,13 @@ public class DetailActivity extends AppCompatActivity {
         Glide.with(DetailActivity.this)
                 .load(profile_url)
                 .transform(new RoundedCorners(30))
+                .centerCrop()
                 .into(ivImageProfile);
 
         Glide.with(DetailActivity.this)
                 .load(picture_url)
                 .transform(new RoundedCorners(30))
+                .centerCrop()
                 .into(ivImage);
 
         queryPost();

@@ -94,7 +94,7 @@ public class HomeFragment extends DialogFragment {
             }
         };
         rvPosts.addOnScrollListener(scrollListener);
-        queryPost();
+//        queryPost();
 
     }
 

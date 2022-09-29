@@ -4,77 +4,42 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.annotation.Nullable;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.example.instagramclone.R;
 import com.example.instagramclone.model.Post;
-import com.parse.ParseFile;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class ProfileAdapter extends RecyclerView.Adapter<ProfileAdapter.ViewHolder> {
+public class ProfileAdapter extends ArrayAdapter<Post> {
 
     Context context;
-    List<Post> posts;
-    View view;
-
-
-    // Pass in the context and list of posts
-    public ProfileAdapter (Context context, List<Post> posts) {
-        this.context = context;
-        this.posts = posts;
+    public ProfileAdapter(@NonNull Context context, ArrayList<Post> posts) {
+        super(context, 0, posts);
     }
 
 
     @NonNull
     @Override
-    public ProfileAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        view = LayoutInflater.from(context).inflate(R.layout.item_profile, parent, false);
-        return new ProfileAdapter.ViewHolder(view);
-    }
+    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
-    @Override
-    public void onBindViewHolder(@NonNull ProfileAdapter.ViewHolder holder, int position) {
-        Post post = posts.get(position);
-        holder.bind(post);
-    }
-
-    @Override
-    public int getItemCount() {
-        return posts.size();
-    }
-
-
-    public  class ViewHolder extends RecyclerView.ViewHolder {
-
-        ImageView ivImage;
-
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-            ivImage = itemView.findViewById(R.id.ivImage);
-
+        View listitemView = convertView;
+        if (listitemView == null) {
+            // Layout Inflater inflates each item to be displayed in GridView.
+            listitemView = LayoutInflater.from(getContext()).inflate(R.layout.item_profile, parent, false);
         }
 
+        Post post = getItem(position);
+        ImageView image = listitemView.findViewById(R.id.ivImage);
 
-        public void bind(Post post) {
-
-            ParseFile image = post.getImage();
-
-            if (image != null) {
-                Glide.with(context)
-                        .load(image.getUrl())
-                        .centerCrop()
-                        .transform(new RoundedCorners(20))
-                        .into(ivImage);
-            }
-        }
-
+        Glide.with(getContext()).load(post.getImage().getUrl()).into(image);
+        return listitemView;
     }
 }
 

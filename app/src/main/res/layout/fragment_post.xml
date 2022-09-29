@@ -11,8 +11,6 @@
         android:id="@+id/pbLoading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@id/btnPicture"
-        android:layout_centerInParent="true"
         android:layout_marginBottom="100dp"
         android:visibility="gone" />
 
@@ -37,7 +35,7 @@
         android:id="@+id/tlInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Description"
+        android:hint="@string/description"
         app:hintEnabled="true"
         android:layout_below="@+id/ivPicture"
         app:hintTextColor="#757373">
@@ -62,7 +60,7 @@
             android:layout_height="50dp"
             android:layout_below="@+id/tlInput"
             android:layout_centerHorizontal="true"
-            android:text="Post"
+            android:text="@string/post"
             android:textColor="@color/black"
             app:backgroundTint="#DC9C9C9C"
             app:cornerRadius="10dp"
@@ -83,7 +81,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Take picture"
+        android:text="@string/take_picture"
         android:textAlignment="center"
         app:backgroundTint="#DC9C9C9C"
         app:cornerRadius="10dp"

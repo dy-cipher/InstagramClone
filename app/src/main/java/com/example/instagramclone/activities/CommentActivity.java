@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.example.instagramclone.R;
 import com.example.instagramclone.model.Comment;
 import com.example.instagramclone.model.Post;
@@ -42,12 +43,17 @@ public class CommentActivity extends AppCompatActivity {
         post = Parcels.unwrap(getIntent().getParcelableExtra("post"));
         ParseUser currentUser = ParseUser.getCurrentUser();
         tvUserName.setText(currentUser.getUsername());
-        Glide.with(CommentActivity.this).load(currentUser.getParseFile(User.KEY_PROFILE).getUrl()).into(ivImageProfile);
+        Glide.with(CommentActivity.this)
+                .load(currentUser.getParseFile(User.KEY_PROFILE)
+                        .getUrl())
+                .centerCrop()
+                .transform(new RoundedCorners(30))
+                .into(ivImageProfile);
 
         btnComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // button to send comment
+                // button to send commentd
                 String description = etComment.getText().toString();
                 if (description.isEmpty()){
                     Toast.makeText(context, "Comment cannot be empty", Toast.LENGTH_SHORT).show();
@@ -64,7 +70,7 @@ public class CommentActivity extends AppCompatActivity {
 
     public void initWidgets(){
         btnComment = findViewById(R.id.btnComment);
-        ivImageProfile = findViewById(R.id.ivImageProfile);
+        ivImageProfile = findViewById(R.id.ivImageprofile);
         etComment = findViewById(R.id.etComment);
         tvUserName = findViewById(R.id.tvUserName);
     }
