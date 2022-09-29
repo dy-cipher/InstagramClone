@@ -60,23 +60,22 @@ public class Post extends ParseObject {
 
     public JSONArray getListLike(){return getJSONArray(KEY_LIST_LIKE);}
     public void setListLike(ParseUser user){add(KEY_LIST_LIKE, user);}
-    public void removeLike(ArrayList<String> listUser){
+    public void removeLike(List<String> listUser){
         remove(KEY_LIST_LIKE);
         put(KEY_LIST_LIKE, listUser);
     }
 
 
-    public static ArrayList<String> fromJsonArray(JSONArray jsonArray) {
-        ArrayList<String> userObjectId = new ArrayList<String>();
 
+    public static ArrayList<String> fromJsonArray(JSONArray jsonArray) throws JSONException {
+        ArrayList<String> listUser = new ArrayList<String>();
         try {
             for (int i = 0; i < jsonArray.length(); i++){
-                userObjectId.add(jsonArray.getJSONObject(i).getString("objectId"));
+                listUser.add(jsonArray.getJSONObject(i).getString("objectId"));
             }
-        }catch (NullPointerException | JSONException e){
+        }catch (NullPointerException e){
             e.printStackTrace();
         }
-
-        return userObjectId;
+        return listUser;
     }
 }

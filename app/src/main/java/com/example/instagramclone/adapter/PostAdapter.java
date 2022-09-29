@@ -33,6 +33,7 @@ import com.parse.ParseFile;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
+import org.json.JSONException;
 import org.parceler.Parcels;
 
 import java.util.ArrayList;
@@ -44,8 +45,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     Context context;
     List<Post> posts;
     View view;
-    public ArrayList<String> users;
-    public int numberLike;
+    public static ArrayList<String> listUsers;
+    public static int numberLike;
     public static final String TAG = "PostAdapter";
 
     // Pass in the context and list of posts
@@ -64,7 +65,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Post post = posts.get(position);
-        holder.bind(post);
+        try {
+            holder.bind(post);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -109,18 +114,21 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         }
 
 
-        public void bind(Post post){
-            users = Post.fromJsonArray(post.getListLike());
+        public void bind(Post post) throws JSONException {
+            ParseUser currentUser = ParseUser.getCurrentUser();
+            listUsers = Post.fromJsonArray(post.getListLike());
             tvDescription.setText(post.getDescription());
             tvUserName.setText(post.getUser().getUsername());
             tvCreatedAt.setText(TimeFormatter.getTimeDifference(post.getCreatedAt().toString()));
-            tvNumberLike.setText(String.valueOf(numberLike) + " like(s)");
+            tvNumberLike.setText(post.getNumberLike() + " like(s)");
             Glide.with(context).load(post.getUser().getParseFile(User.KEY_PROFILE).getUrl()).into(ivImageProfile);
 
-            ParseUser currentUser = ParseUser.getCurrentUser();
 
-            if (users.contains(currentUser.getObjectId())) {
+            if (listUsers.contains(currentUser.getObjectId())) {
                 Drawable drawable = ContextCompat.getDrawable(context, R.drawable.red_heart);
+                ivHeart.setImageDrawable(drawable);
+            }else {
+                Drawable drawable = ContextCompat.getDrawable(context, R.drawable.heart);
                 ivHeart.setImageDrawable(drawable);
             }
 
@@ -177,7 +185,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                     numberLike = post.getNumberLike();
                     int index;
 
-                    if (!users.contains(currentUser.getObjectId())){
+                    if (!listUsers.contains(currentUser.getObjectId())){
                         Drawable drawable = ContextCompat.getDrawable(context, R.drawable.red_heart);
                         ivHeart.setImageDrawable(drawable);
 
@@ -188,7 +196,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                         ivHeart.setImageDrawable(drawable);
 
                         numberLike--;
-                        index = users.indexOf(currentUser.getObjectId());
+                        index = listUsers.indexOf(currentUser.getObjectId());
                     }
 
                     tvNumberLike.setText(String.valueOf(numberLike) + " like(s)");
@@ -202,10 +210,10 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
             if (index == -1){
                 post.setListLike(currentUser);
-                users.add(currentUser.getObjectId());
+                listUsers.add(currentUser.getObjectId());
             }else {
-                users.remove(index);
-                post.removeLike(users);
+                listUsers.remove(index);
+                post.removeLike(listUsers);
             }
 
             post.saveInBackground(new SaveCallback() {
@@ -216,7 +224,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                         return;
                     }
 
-                    Log.i(TAG, users.toString());
+                    Log.i(TAG, listUsers.toString());
                 }
             });
         }
