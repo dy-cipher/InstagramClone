@@ -113,5 +113,16 @@
         android:textSize="18sp"
         tools:text="Post description" />
 
+    <TextView
+        android:id="@+id/tvNumberLike"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvDescription"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="15dp"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        tools:text="23 likes" />
+
 
 </RelativeLayout>

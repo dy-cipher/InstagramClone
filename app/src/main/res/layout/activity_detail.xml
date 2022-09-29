@@ -57,16 +57,16 @@
         android:layout_marginTop="5dp"
         tools:srcCompat="@tools:sample/avatars" />
 
-    <TextView
-        android:id="@+id/tvHeart"
+
+    <ImageView
+        android:id="@+id/ivHeart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/ivImage"
         android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
         android:drawablePadding="5dp"
-        app:drawableLeftCompat="@drawable/heart"
-        tools:text="5" />
+        app:srcCompat="@drawable/heart" />
 
 
     <TextView
@@ -76,7 +76,7 @@
         android:layout_below="@+id/ivImage"
         android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
-        android:layout_toEndOf="@+id/tvHeart"
+        android:layout_toEndOf="@+id/ivHeart"
         android:drawablePadding="5dp"
         app:drawableLeftCompat="@drawable/comment"
         />

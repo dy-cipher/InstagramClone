@@ -1,11 +1,13 @@
 package com.example.instagramclone.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -25,6 +27,7 @@ import com.example.instagramclone.utils.TimeFormatter;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
 import org.parceler.Parcels;
 
@@ -32,13 +35,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DetailActivity extends AppCompatActivity {
-    TextView tvUsername,tvCreatedAt,tvDescription, tvHeart, tvSave, tvComment, tvSend;
-    ImageView ivImage, ivImageProfile;
+    TextView tvUsername,tvCreatedAt,tvDescription, tvSave, tvComment;
+    ImageView ivImage, ivImageProfile, tvHeart;
     RelativeLayout rlContainer;
     RecyclerView rvComments;
     CommentAdapter adapter;
     List<Comment> comments;
     List<String> idComments;
+    List<String> users;
+
     Context context;
     public static final String TAG = "DetailActivity";
 
@@ -56,8 +61,7 @@ public class DetailActivity extends AppCompatActivity {
         tvDescription = findViewById(R.id.tvDescription);
         ivImage = findViewById(R.id.ivImage);
         ivImageProfile = findViewById(R.id.ivImageProfile);
-
-        tvHeart = findViewById(R.id.tvHeart);
+        tvHeart = findViewById(R.id.ivHeart);
         tvSave = findViewById(R.id.tvSave);
         tvComment = findViewById(R.id.tvComment);
         tvDescription = findViewById(R.id.tvShare);
@@ -69,6 +73,12 @@ public class DetailActivity extends AppCompatActivity {
         adapter = new CommentAdapter(context, comments);
         rvComments.setLayoutManager(new LinearLayoutManager(context));
         rvComments.setAdapter(adapter);
+
+        users = Post.fromJsonArray(post.getListLike());
+        if (users.contains(ParseUser.getCurrentUser().getObjectId())) {
+            Drawable drawable = ContextCompat.getDrawable(context, R.drawable.red_heart);
+            tvHeart.setImageDrawable(drawable);
+        }
 
         tvDescription.setText(post.getDescription());
         tvUsername.setText(post.getUser().getUsername());
