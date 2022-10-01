@@ -121,7 +121,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             tvUserName.setText(post.getUser().getUsername());
             tvCreatedAt.setText(TimeFormatter.getTimeDifference(post.getCreatedAt().toString()));
             tvNumberLike.setText(post.getNumberLike() + " like(s)");
-            Glide.with(context).load(post.getUser().getParseFile(User.KEY_PROFILE).getUrl()).into(ivImageProfile);
+            Glide.with(context)
+                    .load(post.getUser().getParseFile(User.KEY_PROFILE).getUrl())
+                    .centerCrop()
+                    .transform(new RoundedCorners(130))
+                    .into(ivImageProfile);
 
 
             if (listUsers.contains(currentUser.getObjectId())) {

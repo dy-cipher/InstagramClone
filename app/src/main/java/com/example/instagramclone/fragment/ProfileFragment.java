@@ -92,7 +92,7 @@ public class ProfileFragment extends DialogFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        GvPosts = view.findViewById(R.id.GvPosts);
+        GvPosts = view.findViewById(R.id.gvPosts);
         btnLogOut = view.findViewById(R.id.btnLogOut);
         ivEdit = view.findViewById(R.id.ivEdit);
         ivImage = view.findViewById(R.id.ivProfile);
@@ -121,7 +121,7 @@ public class ProfileFragment extends DialogFragment {
         Glide.with(getContext())
                 .load(profile_url)
                 .centerCrop()
-                .transform(new RoundedCorners(30))
+                .transform(new RoundedCorners(130))
                 .into(ivImage);
 
         tvUsername.setText(CurrentUser.getUsername());

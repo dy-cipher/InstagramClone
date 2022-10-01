@@ -67,7 +67,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
                     .load(comment.getUser().getParseFile(User.KEY_PROFILE)
                             .getUrl())
                     .centerCrop()
-                    .transform(new RoundedCorners(30))
+                    .transform(new RoundedCorners(130))
                     .into(ivProfile);
         }
     }
